@@ -1,0 +1,107 @@
+<div class="container roles_container">
+    <h1>Configuración de usuarios</h1>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-8">
+                    <div class="input-group mb-3 ">
+                        <div class="form-group mr-5">
+                            <label for="exampleInputEmail1">Nombre</label>
+                            <input type="search" [(ngModel)]="name" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Nombre del usuario">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <button (click)="consultar()" class="btn btn-primary mr-2">Consultar</button>
+                    <button (click)="limpiar()" class="btn btn-success">Limpiar</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="alert">
+                <div class="alert alert-danger" role="alert">
+                    NO HAY RESULTADOS
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-primary ml-2" (click)="registrar()">Crear Usuario</button>
+                <button class="btn btn-success ml-2" (click)="registrar()">Exportar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <table class="table">
+        <thead>
+            <th>
+                Identificacion
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Origen
+            </th>
+            <th>
+                Login
+            </th>
+            <th>
+                Estado
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let itemb of List; let i = index">
+                <td>{{ itemb.nombre }}</td>
+                <td>{{ itemb.descripcion }}</td>
+                <td>{{ itemb.activo }}</td>
+                <td><button (click)="modificar(itemb)" class="btn btn-primary">Modificar</button><button (click)="modificar(itemb)" class="btn btn-success">Asociar Rol</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal modal-open" tabindex="-1" role="dialog" [class.block]="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ TituloModal }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal = false">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group mr-5">
+                            <label for="exampleInputEmail1">Nombre</label>
+                            <input type="search" [(ngModel)]="nameForm" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Nombre Rol" name="Nombre Rol">
+                        </div>
+                        <div class="form-group mr-5">
+                            <label for="exampleInputEmail1">Apellido</label>
+                            <input type="search" [(ngModel)]="nameForm" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Nombre Rol" name="Nombre Rol">
+                        </div>
+
+                        <div class="alert alert-danger" role="alert" *ngIf="errorRegistro">
+                            <h4 class="alert-heading">Error</h4>
+                            <p></p>
+                            <hr>
+                            <p class="mb-0">{{ errorMensaje  }}.</p>
+                        </div>
+                        <div class="alert alert-success" role="alert" *ngIf="exitoRegistro">
+                            <h4 class="alert-heading">Exito</h4>
+
+                            <hr>
+                            <p class="mb-0">{{ successMensaje }}.</p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="modal = false"
+                        data-dismiss="modal">CERRAR</button>
+                    <button type="button" class="btn btn-primary" (click)="rolSave()">GUARDAR ROL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
